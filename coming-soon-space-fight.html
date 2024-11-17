@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coming Soon</title>
+  <style>
+    /* Reset and layout */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      background: black;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+      color: yellow;
+    }
+
+    /* Perspective for the scrolling effect */
+    .star-wars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      perspective: 400px;
+      perspective-origin: 50% 100%;
+    }
+
+    /* The crawl container */
+    .crawl {
+      position: absolute;
+      bottom: 10%; /* Start closer to the viewport */
+      width: 80%; /* Adjust for responsiveness */
+      margin: 0 auto;
+      text-align: center; /* Center the text */
+      animation: crawl 30s linear infinite; /* Shorter duration for faster visibility */
+      transform-origin: 50% 100%;
+      transform: rotateX(25deg);
+    }
+
+    /* Intro text ("In a galaxy far, far away...") */
+    .intro {
+      font-size: clamp(1.5rem, 5vw, 2rem); /* Responsive font size */
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeIn 3s forwards; /* Shortened fade-in time */
+    }
+
+    /* Crawl text */
+    .crawl-text {
+      font-size: clamp(1.25rem, 4vw, 1.5rem); /* Responsive font size */
+      line-height: 1.8; /* Adjusted for readability */
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes crawl {
+      0% {
+        bottom: 10%;
+        transform: translateY(0) rotateX(25deg);
+      }
+      100% {
+        bottom: 100%;
+        transform: translateY(-100%) rotateX(25deg);
+      }
+    }
+
+    /* Outer space background */
+    body::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: black;
+      background-image: radial-gradient(white 1px, transparent 1px);
+      background-size: 2px 2px;
+      opacity: 0.2;
+      z-index: 0;
+    }
+
+    /* Glowing stars */
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+      animation: twinkle 3s infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="star-wars">
+    <div class="crawl">
+      <div class="intro">
+        In a galaxy far, far away...
+      </div>
+      <div class="crawl-text">
+        <p>COMING SOON</p>
+        <p>Prepare for the greatest experience of your life!</p>
+        <p>The epic adventure begins, and you are a part of it.</p>
+        <p>Stay tuned as we bring the stars closer to you.</p>
+        <p>May the force be with you.</p>
+      </div>
+    </div>
+  </div>
+  <div class="stars"></div>
+
+  <script>
+    // Add dynamic stars
+    const starContainer = document.querySelector('.stars');
+    const numStars = 150;
+
+    for (let i = 0; i < numStars; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.animationDelay = `${Math.random() * 3}s`;
+      starContainer.appendChild(star);
+    }
+  </script>
+</body>
+</html>
